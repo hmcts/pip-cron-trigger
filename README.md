@@ -1,12 +1,12 @@
-# Spring Boot application template
+# PIP Cron Timer
 
 [![Build Status](https://travis-ci.org/hmcts/spring-boot-template.svg?branch=master)](https://travis-ci.org/hmcts/spring-boot-template)
 
 ## Purpose
 
-The purpose of this template is to speed up the creation of new Spring applications within HMCTS
-and help keep the same standards across multiple teams. If you need to create a new app, you can
-simply use this one as a starting point and build on top of it.
+The purpose of this service is to contain logic that allows for triggering of scheduled jobs within the other PIP microservices.
+
+This service will be ran alternating on each cluster, to the expected schedule for each trigger.
 
 ## What's inside
 
@@ -91,12 +91,6 @@ The template contains the following plugins:
 ## Setup
 
 Located in `./bin/init.sh`. Simply run and follow the explanation how to execute it.
-
-## Notes
-
-Since Spring Boot 2.1 bean overriding is disabled. If you want to enable it you will need to set `spring.main.allow-bean-definition-overriding` to `true`.
-
-JUnit 5 is now enabled by default in the project. Please refrain from using JUnit4 and use the next generation
 
 ## Building and deploying the application
 
