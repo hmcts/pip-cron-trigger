@@ -19,6 +19,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 @Profile("!test")
 public class WebClientConfiguration {
+
     @Bean
     public OAuth2AuthorizedClientManager authorizedClientManager(ClientRegistrationRepository clients) {
         OAuth2AuthorizedClientService service = new InMemoryOAuth2AuthorizedClientService(clients);
