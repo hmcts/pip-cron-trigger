@@ -107,6 +107,15 @@ To build the project execute the following command:
 
 ### Running the application
 
+### Arguments
+
+Running the application requires a program argument being passed in to indicate which trigger you'd like
+to run.
+
+This argument, which should be the first parameter, should be one of the enum values in Schedule Types.
+
+### Docker
+
 Create the image of the application by executing the following command:
 
 ```bash
