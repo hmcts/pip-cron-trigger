@@ -46,5 +46,5 @@ azure:
     instrumentation-key: ${rpe.AppInsightsInstrumentationKey:00000000-0000-0000-0000-000000000000}
 
 service-to-service:
-  data-management: ${DATA_MANAGEMENT_URL:https://localhost:8090/}
-  account-management: ${ACCOUNT_MANAGEMENT_URL:https://pip-data-management.staging.platform.hmcts.net/}
+  data-management: ${DATA_MANAGEMENT_URL:https://pip-data-management.staging.platform.hmcts.net/}
+  account-management: ${ACCOUNT_MANAGEMENT_URL:https://pip-account-management.staging.platform.hmcts.net/}

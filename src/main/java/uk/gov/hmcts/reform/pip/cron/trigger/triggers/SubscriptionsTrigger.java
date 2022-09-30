@@ -18,8 +18,7 @@ public class SubscriptionsTrigger implements Trigger {
 
     @Override
     public void trigger() {
-        System.out.println("We made it into here!!");
-        String triggerResponse = webClient.post().uri(String.format("%s/publication/latest/subscription", url))
+        webClient.post().uri(String.format("%s/publication/latest/subscription", url))
             .attributes(clientRegistrationId("dataManagementApi"))
             .retrieve()
             .bodyToMono(String.class).block();

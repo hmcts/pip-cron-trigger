@@ -9,7 +9,7 @@ public class Application {
 
     public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
-        System.exit(1);
+        System.exit(0);
     }
 
 }

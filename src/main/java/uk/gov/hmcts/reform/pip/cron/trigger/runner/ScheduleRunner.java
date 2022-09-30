@@ -1,5 +1,7 @@
 package uk.gov.hmcts.reform.pip.cron.trigger.runner;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import java.util.Optional;
  * It selects the correct trigger based on the input, and then exits
  */
 @Service
+@Slf4j
 public class ScheduleRunner implements CommandLineRunner {
 
     @Autowired
@@ -21,7 +24,12 @@ public class ScheduleRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        ScheduleTypes triggerType = ScheduleTypes.SUBSCRIPTIONS;
+        if (args.length != 1 || !EnumUtils.isValidEnum(ScheduleTypes.class, args[0])) {
+            log.error("Invalid or no argument passed in. Exiting");
+            System.exit(1);
+        }
+
+        ScheduleTypes triggerType = ScheduleTypes.valueOf(args[0]);
 
         Optional<? extends Trigger> foundTrigger =
             triggers.stream().filter(trigger -> triggerType.getTriggerClass().equals(trigger.getClass())).findFirst();
@@ -29,7 +37,8 @@ public class ScheduleRunner implements CommandLineRunner {
         if (foundTrigger.isPresent()) {
             foundTrigger.get().trigger();
         } else {
-            System.out.println("Failed to find trigger. Exiting");
+            log.error("Failed to find trigger. Exiting");
+            System.exit(1);
         }
     }
 
