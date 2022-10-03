@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import uk.gov.hmcts.reform.pip.cron.trigger.model.ScheduleTypes;
 
 import java.util.List;
 
@@ -12,10 +13,8 @@ import static org.springframework.security.oauth2.client.web.reactive.function.c
 @Service
 public class AccountInactiveVerificationTrigger implements Trigger {
 
-    @Autowired
     WebClient webClient;
 
-    @Value("${service-to-service.account-management}")
     private String url;
 
     private final List<String> notifyUrls = List.of(
@@ -29,6 +28,12 @@ public class AccountInactiveVerificationTrigger implements Trigger {
         "/admin/inactive",
         "/idam/inactive"
     );
+
+    public AccountInactiveVerificationTrigger(@Autowired WebClient webClient,
+                                              @Value("${service-to-service.account-management}") String url) {
+        this.webClient = webClient;
+        this.url = url;
+    }
 
     @Override
     public void trigger() {
@@ -45,4 +50,10 @@ public class AccountInactiveVerificationTrigger implements Trigger {
                 .bodyToMono(String.class).block());
 
     }
+
+    @Override
+    public boolean isApplicable(ScheduleTypes scheduleTypes) {
+        return scheduleTypes.equals(ScheduleTypes.ACCOUNT_INACTIVE_VERIFICATION);
+    }
+
 }

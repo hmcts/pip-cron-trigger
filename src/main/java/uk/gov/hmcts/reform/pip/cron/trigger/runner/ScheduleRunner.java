@@ -32,7 +32,7 @@ public class ScheduleRunner implements CommandLineRunner {
         ScheduleTypes triggerType = ScheduleTypes.valueOf(args[0]);
 
         Optional<? extends Trigger> foundTrigger =
-            triggers.stream().filter(trigger -> triggerType.getTriggerClass().equals(trigger.getClass())).findFirst();
+            triggers.stream().filter(trigger -> trigger.isApplicable(triggerType)).findFirst();
 
         if (foundTrigger.isPresent()) {
             foundTrigger.get().trigger();

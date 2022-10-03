@@ -12,7 +12,7 @@ import uk.gov.hmcts.reform.pip.cron.trigger.triggers.Trigger;
  */
 public enum ScheduleTypes {
     MEDIA_APPLICATION_REPORTING(MediaApplicationReportingTrigger.class),
-    ACCOUNT_INACTIVE_VERIFICATION_TRIGGER(AccountInactiveVerificationTrigger.class),
+    ACCOUNT_INACTIVE_VERIFICATION(AccountInactiveVerificationTrigger.class),
     SUBSCRIPTIONS(SubscriptionsTrigger.class),
     NO_MATCH_ARTEFACTS(NoMatchArtefactsTrigger.class),
     EXPIRED_ARTEFACTS(ExpiredArtefactsTrigger.class);

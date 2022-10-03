@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import uk.gov.hmcts.reform.pip.cron.trigger.model.ScheduleTypes;
 
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId;
 
@@ -22,6 +23,11 @@ public class SubscriptionsTrigger implements Trigger {
             .attributes(clientRegistrationId("dataManagementApi"))
             .retrieve()
             .bodyToMono(String.class).block();
+    }
+
+    @Override
+    public boolean isApplicable(ScheduleTypes scheduleTypes) {
+        return scheduleTypes.equals(ScheduleTypes.SUBSCRIPTIONS);
     }
 
 }
