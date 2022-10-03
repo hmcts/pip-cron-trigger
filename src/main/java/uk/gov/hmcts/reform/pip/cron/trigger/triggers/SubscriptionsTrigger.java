@@ -11,11 +11,15 @@ import static org.springframework.security.oauth2.client.web.reactive.function.c
 @Service
 public class SubscriptionsTrigger implements Trigger {
 
-    @Autowired
     WebClient webClient;
 
-    @Value("${service-to-service.data-management}")
-    private String url;
+    private final String url;
+
+    public SubscriptionsTrigger(@Autowired WebClient webClient,
+                                   @Value("${service-to-service.data-management}") String url) {
+        this.webClient = webClient;
+        this.url = url;
+    }
 
     @Override
     public void trigger() {

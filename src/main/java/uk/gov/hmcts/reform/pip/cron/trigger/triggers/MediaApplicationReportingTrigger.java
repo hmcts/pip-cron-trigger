@@ -13,7 +13,7 @@ public class MediaApplicationReportingTrigger implements Trigger {
 
     WebClient webClient;
 
-    private String url;
+    private final String url;
 
     public MediaApplicationReportingTrigger(@Autowired WebClient webClient,
                                               @Value("${service-to-service.account-management}") String url) {

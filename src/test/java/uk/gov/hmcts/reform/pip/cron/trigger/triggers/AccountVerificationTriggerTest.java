@@ -19,11 +19,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountVerificationTriggerTest {
+class AccountVerificationTriggerTest {
 
     AccountInactiveVerificationTrigger accountInactiveVerificationTrigger;
 
     private static MockWebServer mockAccountManagementService;
+
+    private static final String POST_METHOD = "POST";
+    private static final String DELETE_METHOD = "DELETE";
+    private static final String METHOD_NOT_AS_EXPECTED = "Method not as expected";
+    private static final String PATH_NOT_AS_EXPECTED = "Path not as expected";
 
     @BeforeAll
     static void setUp() throws IOException {
@@ -54,28 +59,28 @@ public class AccountVerificationTriggerTest {
         accountInactiveVerificationTrigger.trigger();
 
         RecordedRequest recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals("POST", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/account/media/inactive/notify", recordedRequest.getPath(), "Path not as expected");
+        assertEquals(POST_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/account/media/inactive/notify", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
 
         recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals("POST", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/account/admin/inactive/notify", recordedRequest.getPath(), "Path not as expected");
+        assertEquals(POST_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/account/admin/inactive/notify", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
 
         recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals("POST", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/account/idam/inactive/notify", recordedRequest.getPath(), "Path not as expected");
+        assertEquals(POST_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/account/idam/inactive/notify", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
 
         recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals("DELETE", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/account/media/inactive", recordedRequest.getPath(), "Path not as expected");
+        assertEquals(DELETE_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/account/media/inactive", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
 
         recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals("DELETE", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/account/admin/inactive", recordedRequest.getPath(), "Path not as expected");
+        assertEquals(DELETE_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/account/admin/inactive", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
 
         recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals("DELETE", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/account/idam/inactive", recordedRequest.getPath(), "Path not as expected");
+        assertEquals(DELETE_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/account/idam/inactive", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
     }
 
     @Test

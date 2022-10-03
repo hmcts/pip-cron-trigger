@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
-public class WebClientConfigurationTest {
+class WebClientConfigurationTest {
 
     @Mock
     OAuth2AuthorizedClientManager authorizedClientManager;

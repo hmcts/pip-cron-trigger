@@ -11,7 +11,7 @@ import static org.springframework.security.oauth2.client.web.reactive.function.c
 @Service
 public class ExpiredArtefactsTrigger implements Trigger {
 
-    private String url;
+    private final String url;
 
     WebClient webClient;
 

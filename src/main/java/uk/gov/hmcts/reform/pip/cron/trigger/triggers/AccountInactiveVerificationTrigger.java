@@ -15,7 +15,7 @@ public class AccountInactiveVerificationTrigger implements Trigger {
 
     WebClient webClient;
 
-    private String url;
+    private final String url;
 
     private final List<String> notifyUrls = List.of(
         "/media/inactive/notify",

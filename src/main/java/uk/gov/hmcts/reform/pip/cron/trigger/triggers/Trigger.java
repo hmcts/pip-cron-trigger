@@ -3,7 +3,7 @@ package uk.gov.hmcts.reform.pip.cron.trigger.triggers;
 import uk.gov.hmcts.reform.pip.cron.trigger.model.ScheduleTypes;
 
 /**
- * Interface for the logic for each trigger
+ * Interface for the logic for each trigger.
  */
 public interface Trigger {
 

@@ -13,7 +13,7 @@ public class NoMatchArtefactsTrigger implements Trigger {
 
     WebClient webClient;
 
-    private String url;
+    private final String url;
 
     public NoMatchArtefactsTrigger(@Autowired WebClient webClient,
                                    @Value("${service-to-service.data-management}") String url) {

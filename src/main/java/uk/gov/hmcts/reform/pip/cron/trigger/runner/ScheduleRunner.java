@@ -17,6 +17,7 @@ import java.util.Optional;
  */
 @Service
 @Slf4j
+@SuppressWarnings("PMD.DoNotTerminateVM")
 public class ScheduleRunner implements CommandLineRunner {
 
     @Autowired
