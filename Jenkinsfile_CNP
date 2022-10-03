@@ -25,5 +25,5 @@ withPipeline(type, product, component) {
   }
 
   enableSlackNotifications('#pip-build-notices')
-
+  nonServiceApp()
 }
