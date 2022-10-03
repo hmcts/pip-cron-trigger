@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<supressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
   <suppress until="2030-01-01">
     <notes><![CDATA[
      Suppressing as it's a false positive (see: https://pivotal.io/security/cve-2018-1258)
@@ -27,4 +27,4 @@
     <packageUrl regex="true">^pkg:maven/org\.springframework/spring.*$</packageUrl>
     <cve>CVE-2016-1000027</cve>
   </suppress>
-</supressions>
+</suppressions>
