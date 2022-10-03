@@ -201,6 +201,11 @@ dependencies {
 
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
+  // Force upgrade snakeyaml version for CVE-2022-38750
+  implementation( group: 'org.yaml', name: 'snakeyaml').version {
+    strictly("1.33")
+  }
+
   testImplementation(platform('org.junit:junit-bom:5.9.1'))
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
   testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', {
@@ -216,7 +221,7 @@ dependencies {
 mainClassName = 'uk.gov.hmcts.reform.demo.Application'
 
 bootJar {
-  archiveFileName = "spring-boot-template.jar"
+  archiveFileName = "pip-cron-trigger.jar"
 
   manifest {
     attributes('Implementation-Version': project.version.toString())
