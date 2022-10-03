@@ -20,7 +20,7 @@ job:
         - name: app-pip-account-management-scope
           alias: ACCOUNT_MANAGEMENT_AZ_API
   environment:
-global:
-  jobKind: CronJob
-  enableKeyVaults: true
-schedule: "0 1 * * *"
+  global:
+    jobKind: CronJob
+    enableKeyVaults: true
+  schedule: "0 1 * * *"
