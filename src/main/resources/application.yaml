@@ -14,7 +14,6 @@ management:
 springdoc:
   packagesToScan: uk.gov.hmcts.reform.pip.cron.trigger.controllers
 
-#If you use a database then uncomment below lines and update db properties accordingly
 spring:
   main:
     web-application-type: servlet
@@ -43,7 +42,7 @@ spring:
 
 azure:
   application-insights:
-    instrumentation-key: ${rpe.AppInsightsInstrumentationKey:00000000-0000-0000-0000-000000000000}
+    instrumentation-key: ${INSTRUMENTATION_KEY:00000000-0000-0000-0000-000000000000}
 
 service-to-service:
   data-management: ${DATA_MANAGEMENT_URL:https://pip-data-management.staging.platform.hmcts.net/}
