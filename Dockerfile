@@ -3,5 +3,5 @@ FROM hmctspublic.azurecr.io/base/java:11-distroless
 
 COPY build/libs/pip-cron-trigger.jar /opt/app/
 
-EXPOSE 4550
+EXPOSE 8050
 CMD [ "pip-cron-trigger.jar" ]

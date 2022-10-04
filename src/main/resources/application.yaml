@@ -1,5 +1,5 @@
 server:
-  port: 8125
+  port: 8050
 
 management:
   endpoint:
