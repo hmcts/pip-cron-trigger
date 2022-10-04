@@ -110,6 +110,18 @@ to run.
 
 This argument, which should be the first parameter, should be one of the enum values in Schedule Types.
 
+### Environment Variables
+
+Name | Description |
+--- | --- |
+CLIENT_ID | The Client ID for the PIP Cron Job |
+CLIENT_SECRET | The Client Secret for the PIP Cron Job |
+TENANT_ID | The tenant ID for the Azure Active Directory |
+DATA_MANAGEMENT_AZ_API | The Scope for Data Management |
+ACCOUNT_MANAGEMENT_AZ_API | The Scope for Account Management |
+DATA_MANAGEMENT_URL | The URL for Data Management (Defaults to Staging) |
+ACCOUNT_MANAGEMENT_URL | The URL for Account Management (Defaults to Staging) |
+
 ### Docker
 
 Create the image of the application by executing the following command:
