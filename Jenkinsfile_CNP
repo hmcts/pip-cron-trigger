@@ -1,0 +1,29 @@
+#!groovy
+
+@Library("Infrastructure")
+
+def type = "java"
+def product = "pip"
+def component = "cron-trigger"
+
+withPipeline(type, product, component) {
+
+  onMaster() {
+    env.ENV = 'stg'
+  }
+  onPR() {
+    env.ENV = 'dev'
+  }
+  onDemo {
+    env.ENV = 'demo'
+  }
+  onPerftest {
+    env.ENV = 'perftest'
+  }
+  onIthc {
+    env.ENV = 'ithc'
+  }
+
+  enableSlackNotifications('#pip-build-notices')
+  nonServiceApp()
+}

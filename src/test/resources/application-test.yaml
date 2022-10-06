@@ -1,0 +1,3 @@
+service-to-service:
+  data-management: localhost:4551
+  account-management: localhost:4550
