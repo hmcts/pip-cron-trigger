@@ -25,7 +25,8 @@ public class ScheduleRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        log.info(args[0]);
+        if (args.length > 0) log.info(args[0]);
+
         if (args.length != 1 || !EnumUtils.isValidEnum(ScheduleTypes.class, args[0])) {
             log.error("Invalid or no argument passed in. Exiting");
             System.exit(1);
