@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.gov.hmcts.reform.pip.cron.trigger.config.CronTimerProperties;
 import uk.gov.hmcts.reform.pip.cron.trigger.model.ScheduleTypes;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.AccountInactiveVerificationTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.Trigger;
@@ -31,54 +32,30 @@ class ScheduleRunnerTest {
     private List<Trigger> mockArrayList;
 
     @Mock
+    CronTimerProperties cronTimerProperties;
+
+    @Mock
     AccountInactiveVerificationTrigger accountInactiveVerificationTrigger;
 
     private static final String MESSAGE_DO_NOT_MATCH_MESSAGE = "Messages do not match";
     private static final String STATUS_DO_NOT_MATCH_MESSAGE = "Status codes do not match";
 
     @Test
-    void testRunnerWhereNoArgProvided() throws Exception {
+    void testRunnerWhereInvalidArgProvided() throws Exception {
         try (LogCaptor logCaptor = LogCaptor.forClass(ScheduleRunner.class)) {
+
+            when(cronTimerProperties.getTriggerType()).thenReturn("UNKNOWN_ENUM");
+
             int statusCode = catchSystemExit(() -> {
                 scheduleRunner.run();
             });
 
-            assertTrue(logCaptor.getErrorLogs().get(0).contains("Invalid or no argument passed in. Exiting"),
-                       MESSAGE_DO_NOT_MATCH_MESSAGE);
-
-            assertEquals(1, statusCode, STATUS_DO_NOT_MATCH_MESSAGE);
-
-        }
-    }
-
-    @Test
-    void testRunnerWhereInvalidArgProvided() throws Exception {
-        try (LogCaptor logCaptor = LogCaptor.forClass(ScheduleRunner.class)) {
-            int statusCode = catchSystemExit(() -> {
-                scheduleRunner.run("UNKNOWN_ENUM");
-            });
-
             assertTrue(
-                logCaptor.getErrorLogs().get(0).contains("Invalid or no argument passed in. Exiting"),
+                logCaptor.getErrorLogs().get(0).contains("Invalid or no schedule type set. Exiting"),
                 MESSAGE_DO_NOT_MATCH_MESSAGE
             );
 
             assertEquals(1, statusCode, STATUS_DO_NOT_MATCH_MESSAGE);
-        }
-    }
-
-    @Test
-    void testRunnerWhereMoreThanOneArgProvided() throws Exception {
-        try (LogCaptor logCaptor = LogCaptor.forClass(ScheduleRunner.class)) {
-            int statusCode = catchSystemExit(() -> {
-                scheduleRunner.run("MEDIA_APPLICATION_REPORTING", "EXPIRED_ARTEFACTS");
-            });
-
-            assertTrue(logCaptor.getErrorLogs().get(0).contains("Invalid or no argument passed in. Exiting"),
-                       MESSAGE_DO_NOT_MATCH_MESSAGE);
-
-            assertEquals(1, statusCode, STATUS_DO_NOT_MATCH_MESSAGE);
-
         }
     }
 
@@ -89,7 +66,9 @@ class ScheduleRunnerTest {
             .thenReturn(true);
         doNothing().when(accountInactiveVerificationTrigger).trigger();
 
-        scheduleRunner.run("ACCOUNT_INACTIVE_VERIFICATION");
+        when(cronTimerProperties.getTriggerType()).thenReturn("ACCOUNT_INACTIVE_VERIFICATION");
+
+        scheduleRunner.run();
         verify(accountInactiveVerificationTrigger, Mockito.times(1)).trigger();
     }
 
@@ -100,8 +79,10 @@ class ScheduleRunnerTest {
             when(accountInactiveVerificationTrigger.isApplicable(ScheduleTypes.NO_MATCH_ARTEFACTS))
                 .thenReturn(false);
 
+            when(cronTimerProperties.getTriggerType()).thenReturn("NO_MATCH_ARTEFACTS");
+
             int statusCode = catchSystemExit(() -> {
-                scheduleRunner.run("NO_MATCH_ARTEFACTS");
+                scheduleRunner.run();
             });
 
             assertTrue(logCaptor.getErrorLogs().get(0).contains("Failed to find trigger. Exiting"),
