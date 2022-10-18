@@ -44,6 +44,9 @@ azure:
   application-insights:
     instrumentation-key: ${INSTRUMENTATION_KEY:00000000-0000-0000-0000-000000000000}
 
+app:
+  trigger-type: ${TRIGGER_TYPE}
+
 service-to-service:
   data-management: ${DATA_MANAGEMENT_URL:https://pip-data-management.staging.platform.hmcts.net/}
   account-management: ${ACCOUNT_MANAGEMENT_URL:https://pip-account-management.staging.platform.hmcts.net/}

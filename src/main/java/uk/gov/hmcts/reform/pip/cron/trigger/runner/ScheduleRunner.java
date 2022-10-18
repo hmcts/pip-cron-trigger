@@ -5,6 +5,7 @@ import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import uk.gov.hmcts.reform.pip.cron.trigger.config.CronTimerProperties;
 import uk.gov.hmcts.reform.pip.cron.trigger.model.ScheduleTypes;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.Trigger;
 
@@ -23,14 +24,17 @@ public class ScheduleRunner implements CommandLineRunner {
     @Autowired
     private List<? extends Trigger> triggers;
 
+    @Autowired
+    private CronTimerProperties cronTimerProperties;
+
     @Override
     public void run(String... args) {
-        if (args.length != 1 || !EnumUtils.isValidEnum(ScheduleTypes.class, args[0])) {
-            log.error("Invalid or no argument passed in. Exiting");
+        if (!EnumUtils.isValidEnum(ScheduleTypes.class, cronTimerProperties.getTriggerType())) {
+            log.error("Invalid or no schedule type set. Exiting");
             System.exit(1);
         }
 
-        ScheduleTypes triggerType = ScheduleTypes.valueOf(args[0]);
+        ScheduleTypes triggerType = ScheduleTypes.valueOf(cronTimerProperties.getTriggerType());
 
         Optional<? extends Trigger> foundTrigger =
             triggers.stream().filter(trigger -> trigger.isApplicable(triggerType)).findFirst();

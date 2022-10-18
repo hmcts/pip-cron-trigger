@@ -103,13 +103,6 @@ To build the project execute the following command:
 
 ### Running the application
 
-### Arguments
-
-Running the application requires a program argument being passed in to indicate which trigger you'd like
-to run.
-
-This argument, which should be the first parameter, should be one of the enum values in Schedule Types.
-
 ### Environment Variables
 
 Name | Description |
@@ -121,6 +114,7 @@ DATA_MANAGEMENT_AZ_API | The Scope for Data Management |
 ACCOUNT_MANAGEMENT_AZ_API | The Scope for Account Management |
 DATA_MANAGEMENT_URL | The URL for Data Management (Defaults to Staging) |
 ACCOUNT_MANAGEMENT_URL | The URL for Account Management (Defaults to Staging) |
+TRIGGER_TYPE | The trigger type to use for the app. Must be one of 'ScheduleTypes'
 
 ### Docker
 
