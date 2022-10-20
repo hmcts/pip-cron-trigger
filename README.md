@@ -112,8 +112,10 @@ CLIENT_SECRET | The Client Secret for the PIP Cron Job |
 TENANT_ID | The tenant ID for the Azure Active Directory |
 DATA_MANAGEMENT_AZ_API | The Scope for Data Management |
 ACCOUNT_MANAGEMENT_AZ_API | The Scope for Account Management |
+PUBLICATION_SERVICES_AZ_API | The Scope for Publication Services |
 DATA_MANAGEMENT_URL | The URL for Data Management (Defaults to Staging) |
 ACCOUNT_MANAGEMENT_URL | The URL for Account Management (Defaults to Staging) |
+PUBLICATION_SERVICES_URL | The URL for Publication Services (Defaults to Staging) |
 TRIGGER_TYPE | The trigger type to use for the app. Must be one of 'ScheduleTypes'
 
 ### Docker
