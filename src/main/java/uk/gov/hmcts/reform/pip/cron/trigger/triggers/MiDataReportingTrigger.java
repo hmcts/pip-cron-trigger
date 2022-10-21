@@ -20,7 +20,7 @@ public class MiDataReportingTrigger implements Trigger {
 
     @Override
     public void trigger() {
-        webClient.post().uri(String.format("%s/notify/mi-data", url))
+        webClient.post().uri(String.format("%s/notify/mi/report", url))
             .attributes(clientRegistrationId("publicationServicesApi"))
             .retrieve()
             .bodyToMono(String.class).block();

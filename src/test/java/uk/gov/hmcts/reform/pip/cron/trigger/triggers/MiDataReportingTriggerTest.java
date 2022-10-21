@@ -46,7 +46,7 @@ class MiDataReportingTriggerTest {
 
         RecordedRequest recordedRequest = mockPublicationServicesService.takeRequest();
         assertEquals("POST", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/notify/mi-data", recordedRequest.getPath(), "Path not as expected");
+        assertEquals("/notify/mi/report", recordedRequest.getPath(), "Path not as expected");
     }
 
     @Test
