@@ -206,6 +206,16 @@ dependencies {
     strictly("1.33")
   }
 
+  // Force upgrade reactor-netty version for CVE-2022-31684
+  implementation( group: 'io.projectreactor.netty', name: 'reactor-netty-core').version {
+    strictly("1.0.24")
+  }
+
+  // Force upgrade reactor-netty version for CVE-2022-31684
+  implementation( group: 'io.projectreactor.netty', name: 'reactor-netty-http').version {
+    strictly("1.0.24")
+  }
+
   testImplementation(platform('org.junit:junit-bom:5.9.1'))
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
   testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', {
