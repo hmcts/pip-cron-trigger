@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
-  <suppress>
-    <notes>A new vulnerability flagged. Needing to suppress until a new version of spring boot is released</notes>
-    <packageUrl regex="true">^pkg:maven/org.springframework.security/.*@5.7.4$</packageUrl>
-    <cve>CVE-2022-31692</cve>
-    <cve>CVE-2022-31690</cve>
-  </suppress>
-</suppressions>
