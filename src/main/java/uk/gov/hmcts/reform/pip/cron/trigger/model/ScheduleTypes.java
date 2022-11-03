@@ -3,6 +3,7 @@ package uk.gov.hmcts.reform.pip.cron.trigger.model;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.AccountInactiveVerificationTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.ExpiredArtefactsTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.MediaApplicationReportingTrigger;
+import uk.gov.hmcts.reform.pip.cron.trigger.triggers.MiDataReportingTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.NoMatchArtefactsTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.SubscriptionsTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.Trigger;
@@ -15,7 +16,8 @@ public enum ScheduleTypes {
     ACCOUNT_INACTIVE_VERIFICATION(AccountInactiveVerificationTrigger.class),
     SUBSCRIPTIONS(SubscriptionsTrigger.class),
     NO_MATCH_ARTEFACTS(NoMatchArtefactsTrigger.class),
-    EXPIRED_ARTEFACTS(ExpiredArtefactsTrigger.class);
+    EXPIRED_ARTEFACTS(ExpiredArtefactsTrigger.class),
+    MI_DATA_REPORTING(MiDataReportingTrigger.class);
 
     private Class<? extends Trigger> triggerClass;
 
