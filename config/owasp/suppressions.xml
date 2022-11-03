@@ -53,5 +53,6 @@
     <packageUrl regex="true">^pkg:maven/org.springframework.security/.*@5.7.4$</packageUrl>
     <cve>CVE-2022-31692</cve>
     <cve>CVE-2022-31690</cve>
+    <cve>CVE-2020-5408</cve>
   </suppress>
 </suppressions>
