@@ -197,7 +197,7 @@ dependencies {
   implementation 'com.azure.spring:spring-cloud-azure-starter-active-directory:4.4.0'
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-  implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.3'
+  implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.10.0'
 
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
