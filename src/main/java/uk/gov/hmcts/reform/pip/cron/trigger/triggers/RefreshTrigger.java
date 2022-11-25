@@ -51,6 +51,6 @@ public class RefreshTrigger implements Trigger {
 
     @Override
     public boolean isApplicable(ScheduleTypes scheduleTypes) {
-        return scheduleTypes.equals(ScheduleTypes.REFRESH);
+        return scheduleTypes.equals(ScheduleTypes.REFRESH_VIEWS);
     }
 }

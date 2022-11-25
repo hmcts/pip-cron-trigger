@@ -19,7 +19,7 @@ public enum ScheduleTypes {
     NO_MATCH_ARTEFACTS(NoMatchArtefactsTrigger.class),
     EXPIRED_ARTEFACTS(ExpiredArtefactsTrigger.class),
     MI_DATA_REPORTING(MiDataReportingTrigger.class),
-    REFRESH(RefreshTrigger.class);
+    REFRESH_VIEWS(RefreshTrigger.class);
 
     private Class<? extends Trigger> triggerClass;
 

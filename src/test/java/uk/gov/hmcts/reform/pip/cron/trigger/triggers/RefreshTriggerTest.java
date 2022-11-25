@@ -80,7 +80,7 @@ class RefreshTriggerTest {
 
     @Test
     void testIsApplicable() {
-        assertTrue(refreshTrigger.isApplicable(ScheduleTypes.REFRESH),
+        assertTrue(refreshTrigger.isApplicable(ScheduleTypes.REFRESH_VIEWS),
                    "Marked as not applicable when applicable enum");
     }
 
