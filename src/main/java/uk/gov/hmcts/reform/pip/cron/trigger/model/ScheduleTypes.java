@@ -5,6 +5,7 @@ import uk.gov.hmcts.reform.pip.cron.trigger.triggers.ExpiredArtefactsTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.MediaApplicationReportingTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.MiDataReportingTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.NoMatchArtefactsTrigger;
+import uk.gov.hmcts.reform.pip.cron.trigger.triggers.RefreshTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.SubscriptionsTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.Trigger;
 
@@ -17,7 +18,8 @@ public enum ScheduleTypes {
     SUBSCRIPTIONS(SubscriptionsTrigger.class),
     NO_MATCH_ARTEFACTS(NoMatchArtefactsTrigger.class),
     EXPIRED_ARTEFACTS(ExpiredArtefactsTrigger.class),
-    MI_DATA_REPORTING(MiDataReportingTrigger.class);
+    MI_DATA_REPORTING(MiDataReportingTrigger.class),
+    REFRESH(RefreshTrigger.class);
 
     private Class<? extends Trigger> triggerClass;
 
