@@ -57,6 +57,13 @@
   </suppress>
   <suppress>
     <notes>Netty - Will be fixed when upgrading to springboot 3</notes>
+    <cve>CVE-2022-41881</cve>
     <cve>CVE-2022-41915</cve>
+  </suppress>
+  <suppress>
+    <notes>Already on latest version</notes>
+    <packageUrl>pkg:maven/org.yaml/snakeyaml@1.33</packageUrl>
+    <cve>CVE-2022-3064</cve>
+    <cve>CVE-2021-4235</cve>
   </suppress>
 </suppressions>
