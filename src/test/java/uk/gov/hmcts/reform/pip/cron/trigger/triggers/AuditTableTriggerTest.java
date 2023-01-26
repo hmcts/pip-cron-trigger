@@ -1,6 +1,8 @@
 package uk.gov.hmcts.reform.pip.cron.trigger.triggers;
 
+import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +12,7 @@ import uk.gov.hmcts.reform.pip.cron.trigger.model.ScheduleTypes;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,6 +21,11 @@ class AuditTableTriggerTest {
     AuditTableTrigger auditTableTrigger;
 
     private static MockWebServer mockAccountManagementService;
+
+    private static final String DELETE_METHOD = "DELETE";
+
+    private static final String METHOD_NOT_AS_EXPECTED = "Method not as expected";
+    private static final String PATH_NOT_AS_EXPECTED = "Path not as expected";
 
     @BeforeAll
     static void setUp() throws IOException {
@@ -35,6 +43,16 @@ class AuditTableTriggerTest {
         WebClient webClient = WebClient.create();
         String url = "http://localhost:4550";
         auditTableTrigger = new AuditTableTrigger(webClient, url);
+    }
+
+    @Test
+    void testTrigger() throws InterruptedException {
+        mockAccountManagementService.enqueue(new MockResponse());
+        auditTableTrigger.trigger();
+
+        RecordedRequest recordedRequest = mockAccountManagementService.takeRequest();
+        assertEquals(DELETE_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
+        assertEquals("/audit", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
     }
 
     @Test
