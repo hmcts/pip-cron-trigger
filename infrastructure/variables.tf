@@ -8,9 +8,13 @@ variable "location" {
 
 variable "env" {}
 
-variable "subscription" {}
+variable "subscription" {
+  default = ""
+}
 
-variable "deployment_namespace" {}
+variable "deployment_namespace" {
+  default = ""
+}
 
 variable "common_tags" {
   type = map(string)
