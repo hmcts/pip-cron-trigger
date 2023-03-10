@@ -8,44 +8,18 @@
     <cve>CVE-2021-42306</cve>
   </suppress>
   <suppress>
-    <notes><![CDATA[Spring old vuln thats been re-flagged recently, doesnt look like we are impacted]]></notes>
+    <notes>Spring old vuln thats been re-flagged recently, doesnt look like we are impacted. Already on latest spring 2.x.x></notes>
     <packageUrl regex="true">^pkg:maven/org\.springframework/spring.*$</packageUrl>
     <cve>CVE-2016-1000027</cve>
   </suppress>
   <suppress>
-    <notes><![CDATA[
-   file name: snakeyaml-1.33.jar
-   ]]></notes>
+    <notes>snakeyaml-1.33.jar - On latest spring 2.x.x</notes>
     <packageUrl regex="true">^pkg:maven/org.yaml/snakeyaml@1.33</packageUrl>
     <cve>CVE-2022-1471</cve>
   </suppress>
   <suppress>
-    <notes><![CDATA[
-   file name: jackson-databind-2.13.4.jar
-   ]]></notes>
-    <packageUrl regex="true">^pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.13.4</packageUrl>
-    <cve>CVE-2022-42003</cve>
-  </suppress>
-  <suppress>
-    <notes><![CDATA[
-   file name: spring-security-crypto-5.7.6.jar
-   ]]></notes>
-    <packageUrl regex="true">^pkg:maven/org.springframework.security/spring-security-crypto@5.7.6</packageUrl>
+    <notes>pring-security-crypto-5.7.7.jar - On latest spring 2.x.x</notes>
+    <packageUrl regex="true">^pkg:maven/org.springframework.security/spring-security-crypto@5.7.7</packageUrl>
     <cve>CVE-2020-5408</cve>
-  </suppress>
-  <suppress>
-    <notes>Netty - Will be fixed when upgrading to springboot 3</notes>
-    <cve>CVE-2022-41881</cve>
-    <cve>CVE-2022-41915</cve>
-  </suppress>
-  <suppress>
-    <notes>Already on latest version</notes>
-    <packageUrl>pkg:maven/org.yaml/snakeyaml@1.33</packageUrl>
-    <cve>CVE-2022-3064</cve>
-    <cve>CVE-2021-4235</cve>
-  </suppress>
-  <suppress>
-    <notes>com.fasterxml.woodstox</notes>
-    <cve>CVE-2022-40152</cve>
   </suppress>
 </suppressions>
