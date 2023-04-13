@@ -18,8 +18,13 @@
     <cve>CVE-2022-1471</cve>
   </suppress>
   <suppress>
-    <notes>pring-security-crypto-5.7.7.jar - On latest spring 2.x.x</notes>
+    <notes>spring-security-crypto-5.7.7.jar - On latest spring 2.x.x</notes>
     <packageUrl regex="true">^pkg:maven/org.springframework.security/spring-security-crypto@5.7.7</packageUrl>
     <cve>CVE-2020-5408</cve>
+  </suppress>
+  <suppress>
+    <notes>json-smart, brought in as part of spring - On latest spring 2.x.x</notes>
+    <packageUrl regex="true">^pkg:maven/net.minidev/json-smart@2.4.8</packageUrl>
+    <cve>CVE-2023-1370</cve>
   </suppress>
 </suppressions>
