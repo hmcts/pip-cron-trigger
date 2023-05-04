@@ -8,6 +8,11 @@
     <cve>CVE-2021-42306</cve>
   </suppress>
   <suppress>
+    <notes>Spring old vuln thats been re-flagged recently, doesnt look like we are impacted. Already on latest spring 2.x.x></notes>
+    <packageUrl regex="true">^pkg:maven/org\.springframework/spring.*$</packageUrl>
+    <cve>CVE-2016-1000027</cve>
+  </suppress>
+  <suppress>
     <notes>snakeyaml-1.33.jar - On latest spring 2.x.x</notes>
     <packageUrl regex="true">^pkg:maven/org.yaml/snakeyaml@1.33</packageUrl>
     <cve>CVE-2022-1471</cve>
