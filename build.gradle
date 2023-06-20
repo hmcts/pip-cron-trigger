@@ -133,7 +133,6 @@ sonarqube {
   properties {
     property "sonar.projectName", "PIP Cron Trigger"
     property "sonar.projectKey", "pip-cron-trigger"
-    property "sonar.exclusions", sonarExclusions.join(', ')
   }
 }
 
