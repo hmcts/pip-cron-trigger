@@ -200,6 +200,11 @@ dependencies {
 
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
+  // Force upgrade snakeyaml version for CVE-2022-1471
+  implementation( group: 'org.yaml', name: 'snakeyaml').version {
+    strictly("2.0")
+  }
+
   testImplementation(platform('org.junit:junit-bom:5.9.3'))
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
   testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', {
