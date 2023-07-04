@@ -26,4 +26,9 @@
     <notes>An issue was discovered jackson-databind thru 2.15.2 allows attackers to cause a denial of service or other unspecified impacts via crafted object that uses cyclic dependencies.</notes>
     <cve>CVE-2023-35116</cve>
   </suppress>
+  <suppress>
+    <notes>Pull in by spring boot. The latest version of spring boot v3.1.1 is still using netty v4.1.93 where the vulnerability still exists</notes>
+    <packageUrl regex="true">^pkg:maven/io.netty/netty-.*$</packageUrl>
+    <cve>CVE-2023-34462</cve>
+  </suppress>
 </suppressions>
