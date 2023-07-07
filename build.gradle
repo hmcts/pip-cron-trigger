@@ -4,7 +4,7 @@ plugins {
   id 'pmd'
   id 'jacoco'
   id 'io.spring.dependency-management' version '1.1.0'
-  id 'org.springframework.boot' version '2.7.12'
+  id 'org.springframework.boot' version '3.0.8'
   id 'org.owasp.dependencycheck' version '8.2.1'
   id 'com.github.ben-manes.versions' version '0.46.0'
   id 'org.sonarqube' version '4.2.0.3129'
@@ -58,6 +58,10 @@ configurations {
 
   smokeTestImplementation.extendsFrom testImplementation
   smokeTestRuntimeOnly.extendsFrom runtimeOnly
+
+  all {
+    exclude group: 'commons-logging', module: 'commons-logging'
+  }
 }
 
 tasks.withType(JavaCompile) {
@@ -104,12 +108,12 @@ task smoke(type: Test) {
 
 checkstyle {
   maxWarnings = 0
-  toolVersion = '9.2.1'
+  toolVersion = '10.12.1'
   getConfigDirectory().set(new File(rootDir, 'config/checkstyle'))
 }
 
 pmd {
-  toolVersion = "6.41.0"
+  toolVersion = "6.52.0"
   sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.integrationTest, sourceSets.smokeTest]
   reportsDir = file("$project.buildDir/reports/pmd")
   // https://github.com/pmd/pmd/issues/876
@@ -122,7 +126,7 @@ jacocoTestReport {
   reports {
     xml.required = true
     csv.required = false
-    xml.destination file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+    xml.outputLocation.set(file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
   }
 }
 
@@ -186,33 +190,23 @@ dependencies {
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 
-  implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+  implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
 
   implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: '6.0.1'
 
   implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
   implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: log4JVersion
 
-  implementation 'com.azure.spring:spring-cloud-azure-starter-active-directory:4.8.0'
+  implementation 'com.azure.spring:spring-cloud-azure-starter-active-directory:5.2.0'
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
   implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.11.0'
 
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-  // Force upgrade snakeyaml version for CVE-2022-38750
+  // Force upgrade snakeyaml version for CVE-2022-1471
   implementation( group: 'org.yaml', name: 'snakeyaml').version {
-    strictly("1.33")
-  }
-
-  // Force upgrade reactor-netty version for CVE-2022-31684
-  implementation( group: 'io.projectreactor.netty', name: 'reactor-netty-core').version {
-    strictly("1.0.24")
-  }
-
-  // Force upgrade reactor-netty version for CVE-2022-31684
-  implementation( group: 'io.projectreactor.netty', name: 'reactor-netty-http').version {
-    strictly("1.0.24")
+    strictly("2.0")
   }
 
   testImplementation(platform('org.junit:junit-bom:5.9.3'))
