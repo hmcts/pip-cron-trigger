@@ -48,10 +48,6 @@ spring:
               scopes:
                 - ${SUBSCRIPTION_MANAGEMENT_AZ_API}/.default
 
-azure:
-  application-insights:
-    instrumentation-key: ${INSTRUMENTATION_KEY:00000000-0000-0000-0000-000000000000}
-
 app:
   trigger-type: ${TRIGGER_TYPE}
 
