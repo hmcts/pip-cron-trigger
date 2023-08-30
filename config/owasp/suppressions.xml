@@ -22,4 +22,9 @@
     <packageUrl regex="true">^pkg:maven/com.squareup.okio/okio-jvm@3.2.0</packageUrl>
     <cve>CVE-2023-3635</cve>
   </suppress>
+  <suppress>
+    <notes>Suppression needed as library pulled in by azure. Issue also on latest version</notes>
+    <packageUrl regex="true">^pkg:maven/io.netty/netty-handler@4.1.97</packageUrl>
+    <cve>CVE-2023-4586</cve>
+  </suppress>
 </suppressions>
