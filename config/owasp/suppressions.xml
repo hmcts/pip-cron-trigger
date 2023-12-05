@@ -28,8 +28,7 @@
   </suppress>
   <suppress>
     <notes>Pulled in by dependency of test dependency logcaptor. On latest version of logcaptor</notes>
-    <packageUrl regex="true">^pkg:maven/ch.qos.logback/logback-classic@1.4.11</packageUrl>
-    <packageUrl regex="true">^pkg:maven/ch.qos.logback/logback-core@1.4.11</packageUrl>
+    <packageUrl regex="true">^pkg:maven/ch\.qos\.logback/logback.*@1.4.11</packageUrl>
     <cve>CVE-2023-6378</cve>
   </suppress>
 </suppressions>
