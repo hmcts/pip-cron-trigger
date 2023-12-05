@@ -26,4 +26,9 @@
     <packageUrl regex="true">^pkg:maven/com\.azure/azure.*$</packageUrl>
     <cve>CVE-2023-36052</cve>
   </suppress>
+  <suppress>
+    <notes>Pulled in by dependency of test dependency logcaptor. On latest version of logcaptor</notes>
+    <packageUrl regex="true">^pkg:maven/ch.qos.logback/*$</packageUrl>
+    <cve>CVE-2023-6378</cve>
+  </suppress>
 </suppressions>
