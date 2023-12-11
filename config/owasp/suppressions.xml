@@ -13,11 +13,6 @@
     <cve>CVE-2023-35116</cve>
   </suppress>
   <suppress>
-    <notes>Pulled in by okhttp (which we're already on the latest version of)</notes>
-    <packageUrl regex="true">^pkg:maven/com.squareup.okio/okio-jvm@3.2.0</packageUrl>
-    <cve>CVE-2023-3635</cve>
-  </suppress>
-  <suppress>
     <notes>Suppression for netty. Pulled in by springboot on latest version</notes>
     <cve>CVE-2023-4586</cve>
   </suppress>
@@ -32,8 +27,8 @@
     <cve>CVE-2023-36052</cve>
   </suppress>
   <suppress>
-    <notes>This is pulled in by parent spring dependency which we're already on the latest version on of 3.0.x</notes>
-    <packageUrl regex="true">^pkg:maven/io.projectreactor.netty/reactor-netty-http@1.1.12</packageUrl>
-    <cve>CVE-2023-34062</cve>
+    <notes>Pulled in by dependency of test dependency logcaptor. On latest version of logcaptor</notes>
+    <packageUrl regex="true">^pkg:maven/ch\.qos\.logback/logback.*@1.4.11</packageUrl>
+    <cve>CVE-2023-6378</cve>
   </suppress>
 </suppressions>
