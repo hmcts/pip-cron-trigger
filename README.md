@@ -1,92 +1,110 @@
-# PIP Cron Timer
+# pip-cron-trigger
 
-[![Build Status](https://travis-ci.org/hmcts/spring-boot-template.svg?branch=master)](https://travis-ci.org/hmcts/spring-boot-template)
+## Table of Contents
 
-## Purpose
+- [Overview](#overview)
+- [Features and Functionality](#features-and-functionality)
+- [Architecture Diagram](#architecture-diagram)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+    - [Environment variables](#environment-variables)
+      - [Getting all environment variables with python](#get-environment-variables-with-python-scripts)
+      - [Runtime secrets](#runtime-secrets)
+      - [Application.yaml files](#applicationyaml-files)
+- [Deployment](#deployment)
+  - [Cron Timings](#cron-timings)
+- [Monitoring and Logging](#monitoring-and-logging)
+  - [Application Insights](#application-insights)
+- [Security Considerations](#security-&-quality-considerations)
+- [Test Suite](#test-suite)
+- [Contributing](#contributing)
+- [License](#license)
 
-The purpose of this service is to contain logic that allows for triggering of scheduled jobs within the other PIP microservices.
+## Overview
+`pip-cron-trigger` is a cron trigger that deals with actions within the Court and Tribunal Hearings Service (CaTH hereafter) that run on a schedule. It is written with Spring Boot/Java.
 
-This service will be run alternating on each cluster, to the expected schedule for each trigger.
+In practice, the service is usually containerized within a hosted kubernetes environment within Azure, which runs on a schedule.
 
-## What's inside
+## Features and Functionality
 
-The template is a working application with a minimal setup. It contains:
- * application skeleton
- * setup script to prepare project
- * common plugins and libraries
- * docker setup
- * swagger configuration for api documentation ([see how to publish your api documentation to shared repository](https://github.com/hmcts/reform-api-docs#publish-swagger-docs))
- * code quality tools already set up
- * integration with Travis CI
- * Hystrix circuit breaker enabled
- * MIT license and contribution information
- * Helm chart using chart-java.
+- Triggers the Inactive Account functionality within Account Management
+- Triggers the Audit Table cleanup functionality within Account Services
+- Triggers the Expired Artefacts cleanup functionality within Data Management
+- Triggers the Media Application Report functionality within Account Management
+- Triggers the MI Report functionality within Publication Services
+- Triggers the No Match Artefact report within Data Management
+- Triggers the refresh of materialised views within Data Management, Subscription Management and Account Management
+- Triggers the sending of subscriptions for future dated publications within Data Management
 
-The application exposes health endpoint (http://localhost:4550/health) and metrics endpoint
-(http://localhost:4550/metrics).
+## Architecture Diagram
 
-## Plugins
+![Architecture Diagram for pip-cron-trigger](./cron-trigger-arch.png)
 
-The template contains the following plugins:
+## Getting Started
 
-  * checkstyle
+### Prerequisites
 
-    https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+##### General
 
-    Performs code style checks on Java source files using Checkstyle and generates reports from these checks.
-    The checks are included in gradle's *check* task (you can run them by executing `./gradlew check` command).
+- [Java JDK 17](https://openjdk.org/projects/jdk/17/) - this is used throughout all of our services.
 
-  * pmd
+##### Local development
 
-    https://docs.gradle.org/current/userguide/pmd_plugin.html
+No specific requirements, other than the standard IDE and Java 17.
 
-    Performs static code analysis to finds common programming flaws. Included in gradle `check` task.
+### Installation
 
+- Clone the repository
+- Ensure all required [environment variables](#environment-variables) have been set.
+- Build using the command `./gradlew clean build`
+- Start the service using the command `./gradlew bootrun` in the newly created directory.
 
-  * jacoco
+### Configuration
 
-    https://docs.gradle.org/current/userguide/jacoco_plugin.html
+#### Environment Variables
 
-    Provides code coverage metrics for Java code via integration with JaCoCo.
-    You can create the report by running the following command:
+Environment variables are used by the service to control its behaviour in various ways.
 
-    ```bash
-      ./gradlew jacocoTestReport
-    ```
+These variables can be found within various separate CaTH Azure keyvaults. You may need to obtain access to this via a support ticket.
+- Runtime secrets are stored in `pip-ss-{env}-kv` (where {env} is the environment where
+- Test secrets are stored in `pip-bootstrap-{env}-kv` with the same convention.
 
-    The report will be created in build/reports subdirectory in your project directory.
+#### Get environment variables with python scripts
+Python scripts to quickly grab all environment variables (subject to Azure permissions) are available for both [runtime](https://github.com/hmcts/pip-dev-env/blob/master/get_envs.py) and [test](https://github.com/hmcts/pip-secret-grabber/blob/master/main.py) secrets.
 
-  * io.spring.dependency-management
+##### Runtime secrets
 
-    https://github.com/spring-gradle-plugins/dependency-management-plugin
+Below is a table of currently used environment variables for starting the service, along with a descriptor of their purpose and whether they are optional or required.
 
-    Provides Maven-like dependency management. Allows you to declare dependency management
-    using `dependency 'groupId:artifactId:version'`
-    or `dependency group:'group', name:'name', version:version'`.
+| Name                         | Description                                                                                                     | Required? |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------|
+| CLIENT_ID                    | The Client ID for the PIP Cron Job                                                                              | No        |
+| CLIENT_SECRET                | The Client Secret for the PIP Cron Job                                                                          | No        |
+| TENANT_ID                    | The tenant ID for the Azure Active Directory                                                                    | No        |
+| DATA_MANAGEMENT_AZ_API       | The Scope for Data Management                                                                                   | No        |
+| ACCOUNT_MANAGEMENT_AZ_API    | The Scope for Account Management                                                                                | No        |
+| PUBLICATION_SERVICES_AZ_API  | The Scope for Publication Services                                                                              | No        |
+| DATA_MANAGEMENT_URL          | The URL for Data Management (Defaults to Staging)                                                               | No        |
+| ACCOUNT_MANAGEMENT_URL       | The URL for Account Management (Defaults to Staging)                                                            | No        |
+| PUBLICATION_SERVICES_URL     | The URL for Publication Services (Defaults to Staging)                                                          | No        |
+| TRIGGER_TYPE                 | The trigger type to use for the app. This is what determines what action is run. Must be one of 'ScheduleTypes' | Yes       |
 
-  * org.springframework.boot
+#### Application.yaml files
+The service can also be adapted using the yaml files found in the following locations:
+- `src/main/resources/application.yaml` for changes to the behaviour of the service itself.
 
-    http://projects.spring.io/spring-boot/
+## Deployment
+We use [Jenkins](https://www.jenkins.io/) as our CI/CD system. The deployment of this can be controlled within our application logic using the various `Jenkinsfile`-prepended files within the root directory of the repository.
 
-    Reduces the amount of work needed to create a Spring application
+Our builds run against our `dev` environment during the Jenkins build process. The cron trigger runs as a non-service app, meaning it follows a slightly different path to the other services (it stops after AKS Deploy).
 
-  * org.owasp.dependencycheck
+If your debugging leads you to conclude that you need to implement a pipeline fix, this can be done in the [CNP Jenkins repo](https://github.com/hmcts/cnp-jenkins-library)
 
-    https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html
+### Cron Timings
 
-    Provides monitoring of the project's dependent libraries and creating a report
-    of known vulnerable components that are included in the build. To run it
-    execute `gradle dependencyCheck` command.
-
-  * com.github.ben-manes.versions
-
-    https://github.com/ben-manes/gradle-versions-plugin
-
-    Provides a task to determine which dependencies have updates. Usage:
-
-    ```bash
-      ./gradlew dependencyUpdates -Drevision=release
-    ```
+The cron timings of this trigger are configured in the Helm Charts. When running in Azure, timings are set to alternate on each cluster to ensure duplicate jobs are not run.
 
 ## Monitoring and Logging
 We utilise [Azure Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) to store our logs. Ask a teammate for the specific resource in Azure to access these.
@@ -103,103 +121,26 @@ The client at runtime is attached as a javaagent, which allows it to send the lo
 To connect to app insights a connection string is used. This is configured to read from the KV Secret mounted inside the pod.
 
 It is possible to connect to app insights locally, although somewhat tricky. The easiest way is to get the connection string from azure, set it as an environment variable (APPLICATIONINSIGHTS_CONNECTION_STRING), and add in the javaagent as VM argument. You will also need to remove / comment out the connection string line the config.
-## Building and deploying the application
 
-### Building the application
+## Security & Quality Considerations
+We use a few automated tools to ensure quality and security within the service. A few examples can be found below:
 
-The project uses [Gradle](https://gradle.org) as a build tool. It already contains
-`./gradlew` wrapper script, so there's no need to install gradle.
+- SonarCloud - provides automated code analysis, finding vulnerabilities, bugs and code smells. Quality gates ensure that test coverage, code style and security are maintained where possible.
+- DependencyCheckAggregate - Ensures that dependencies are kept up to date and that those with known security vulnerabilities (based on the [National Vulnerability Database(NVD)](https://nvd.nist.gov/)) are flagged to developers for mitigation or suppression.
+- JaCoCo Test Coverage - Produces code coverage metrics which allows developers to determine which lines of code are covered (or not) by unit testing. This also makes up one of SonarCloud's quality gates.
+- PMD - Static code analysis tool providing code quality guidance and identifying potential issues relating to coding standards, performance or security.
+- CheckStyle - Enforces coding standards and conventions such as formatting, naming conventions and structure.
 
-To build the project execute the following command:
+## Test Suite
 
-```bash
-  ./gradlew build
-```
+This application is comprehensively tested using a suite of unit tests.
 
-### Running the application
+### Unit tests
 
-### Environment Variables
+Unit tests can be run on demand using `./gradlew test`.
 
-Name | Description |
---- | --- |
-CLIENT_ID | The Client ID for the PIP Cron Job |
-CLIENT_SECRET | The Client Secret for the PIP Cron Job |
-TENANT_ID | The tenant ID for the Azure Active Directory |
-DATA_MANAGEMENT_AZ_API | The Scope for Data Management |
-ACCOUNT_MANAGEMENT_AZ_API | The Scope for Account Management |
-PUBLICATION_SERVICES_AZ_API | The Scope for Publication Services |
-DATA_MANAGEMENT_URL | The URL for Data Management (Defaults to Staging) |
-ACCOUNT_MANAGEMENT_URL | The URL for Account Management (Defaults to Staging) |
-PUBLICATION_SERVICES_URL | The URL for Publication Services (Defaults to Staging) |
-TRIGGER_TYPE | The trigger type to use for the app. Must be one of 'ScheduleTypes'
-
-### Docker
-
-Create the image of the application by executing the following command:
-
-```bash
-  ./gradlew assemble
-```
-
-Create docker image:
-
-```bash
-  docker-compose build
-```
-
-Run the distribution (created in `build/install/spring-boot-template` directory)
-by executing the following command:
-
-```bash
-  docker-compose up
-```
-
-This will start the API container exposing the application's port
-(set to `4550` in this template app).
-
-In order to test if the application is up, you can call its health endpoint:
-
-```bash
-  curl http://localhost:4550/health
-```
-
-You should get a response similar to this:
-
-```
-  {"status":"UP","diskSpace":{"status":"UP","total":249644974080,"free":137188298752,"threshold":10485760}}
-```
-
-### Alternative script to run application
-
-To skip all the setting up and building, just execute the following command:
-
-```bash
-./bin/run-in-docker.sh
-```
-
-For more information:
-
-```bash
-./bin/run-in-docker.sh -h
-```
-
-Script includes bare minimum environment variables necessary to start api instance. Whenever any variable is changed or any other script regarding docker image/container build, the suggested way to ensure all is cleaned up properly is by this command:
-
-```bash
-docker-compose rm
-```
-
-It clears stopped containers correctly. Might consider removing clutter of images too, especially the ones fiddled with:
-
-```bash
-docker images
-
-docker image rm <image-id>
-```
-
-There is no need to remove postgres and java or similar core images.
+## Contributing
+We are happy to accept third-party contributions. See [.github/CONTRIBUTING.md](./.github/CONTRIBUTING.md) for more details.
 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
