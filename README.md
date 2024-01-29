@@ -13,6 +13,7 @@
       - [Getting all environment variables with python](#get-environment-variables-with-python-scripts)
       - [Runtime secrets](#runtime-secrets)
       - [Application.yaml files](#applicationyaml-files)
+  - [Fortify](#fortify)
 - [Deployment](#deployment)
   - [Cron Timings](#cron-timings)
 - [Monitoring and Logging](#monitoring-and-logging)
@@ -94,6 +95,10 @@ Below is a table of currently used environment variables for starting the servic
 #### Application.yaml files
 The service can also be adapted using the yaml files found in the following locations:
 - `src/main/resources/application.yaml` for changes to the behaviour of the service itself.
+
+### Fortify
+
+We use Fortify to scan for security vulnerabilities. This is run as part of our nightly pipelines.
 
 ## Deployment
 We use [Jenkins](https://www.jenkins.io/) as our CI/CD system. The deployment of this can be controlled within our application logic using the various `Jenkinsfile`-prepended files within the root directory of the repository.
