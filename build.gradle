@@ -154,6 +154,13 @@ dependencies {
   testImplementation 'com.github.stefanbirkner:system-lambda:1.2.1'
   testImplementation 'io.github.hakky54:logcaptor:2.9.2'
   testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+  testImplementation group: 'com.github.hmcts', name: 'fortify-client', version: '1.4.0', classifier: 'all'
+}
+
+task fortifyScan(type: JavaExec)  {
+  main = "uk.gov.hmcts.fortifyclient.FortifyClientMainApp"
+  classpath += sourceSets.test.runtimeClasspath
+  jvmArgs = ['--add-opens=java.base/java.lang.reflect=ALL-UNNAMED']
 }
 
 mainClassName = 'uk.gov.hmcts.reform.pip.cron.trigger.Application'
