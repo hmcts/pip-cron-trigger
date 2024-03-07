@@ -8,7 +8,7 @@ plugins {
   id 'org.owasp.dependencycheck' version '9.0.9'
   id 'com.github.ben-manes.versions' version '0.51.0'
   id 'org.sonarqube' version '4.4.1.3373'
-  id 'io.freefair.lombok' version '8.4'
+  id 'io.freefair.lombok' version '8.6'
 }
 
 group = 'uk.gov.hmcts.reform'
@@ -49,7 +49,7 @@ test {
 
 checkstyle {
   maxWarnings = 0
-  toolVersion = '10.13.0'
+  toolVersion = '10.14.0'
   getConfigDirectory().set(new File(rootDir, 'config/checkstyle'))
 }
 
@@ -122,7 +122,7 @@ repositories {
 }
 
 ext {
-  log4JVersion = "2.22.1"
+  log4JVersion = "2.23.0"
 }
 
 dependencies {
@@ -137,7 +137,7 @@ dependencies {
   implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
   implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: log4JVersion
 
-  implementation 'com.azure.spring:spring-cloud-azure-starter-active-directory:5.8.0'
+  implementation 'com.azure.spring:spring-cloud-azure-starter-active-directory:5.10.0'
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
   implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.12.0'
