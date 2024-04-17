@@ -23,7 +23,7 @@ public enum ScheduleTypes {
     REFRESH_VIEWS(RefreshTrigger.class),
     CLEAR_AUDIT_TABLE(AuditTableTrigger.class);
 
-    private Class<? extends Trigger> triggerClass;
+    private final Class<? extends Trigger> triggerClass;
 
     ScheduleTypes(Class<? extends Trigger> triggerClass) {
         this.triggerClass = triggerClass;
