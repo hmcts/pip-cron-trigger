@@ -41,17 +41,6 @@ class ScheduleRunnerTest {
 
     private static final String MESSAGE_DO_NOT_MATCH_MESSAGE = "Messages do not match";
     private static final String STATUS_DO_NOT_MATCH_MESSAGE = "Status codes do not match";
-
-    @Before
-    public void setUp() {
-        System.setProperty("java.security.manager", "allow");
-    }
-
-    @After
-    public void tearDown() {
-        System.clearProperty("java.security.manager");
-    }
-
     @Test
     void testRunnerWhereInvalidArgProvided() throws Exception {
         try (LogCaptor logCaptor = LogCaptor.forClass(ScheduleRunner.class)) {
