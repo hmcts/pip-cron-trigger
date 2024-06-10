@@ -1,8 +1,6 @@
 package uk.gov.hmcts.reform.pip.cron.trigger.runner;
 
 import nl.altindag.log.LogCaptor;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,6 +39,7 @@ class ScheduleRunnerTest {
 
     private static final String MESSAGE_DO_NOT_MATCH_MESSAGE = "Messages do not match";
     private static final String STATUS_DO_NOT_MATCH_MESSAGE = "Status codes do not match";
+
     @Test
     void testRunnerWhereInvalidArgProvided() throws Exception {
         try (LogCaptor logCaptor = LogCaptor.forClass(ScheduleRunner.class)) {
