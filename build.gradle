@@ -16,7 +16,7 @@ version = '0.0.1'
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
+    languageVersion = JavaLanguageVersion.of(21)
   }
 }
 
@@ -45,6 +45,7 @@ tasks.withType(Test) {
 
 test {
   failFast = true
+  jvmArgs '-Djava.security.manager=allow'
 }
 
 checkstyle {

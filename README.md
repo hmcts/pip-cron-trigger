@@ -49,11 +49,11 @@ In practice, the service is usually containerized within a hosted kubernetes env
 
 ##### General
 
-- [Java JDK 17](https://openjdk.org/projects/jdk/17/) - this is used throughout all of our services.
+- [Java JDK 21](https://openjdk.org/projects/jdk/21/) - this is used throughout all of our services.
 
 ##### Local development
 
-No specific requirements, other than the standard IDE and Java 17.
+No specific requirements, other than the standard IDE and Java 21.
 
 ### Installation
 
