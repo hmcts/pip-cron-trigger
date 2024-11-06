@@ -57,7 +57,7 @@ checkstyle {
 pmd {
   toolVersion = "7.7.0"
   sourceSets = [sourceSets.main, sourceSets.test]
-  reportsDir = file("$project.buildDir/reports/pmd")
+  reportsDir = file("${layout.buildDirectory.get()}/reports/pmd")
   ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
@@ -66,7 +66,7 @@ jacocoTestReport {
   reports {
     xml.required = true
     csv.required = false
-    xml.outputLocation.set(file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
+    xml.outputLocation.set(layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml"))
   }
 }
 
