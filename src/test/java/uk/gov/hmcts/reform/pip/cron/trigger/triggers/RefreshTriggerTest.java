@@ -21,18 +21,12 @@ class RefreshTriggerTest {
     RefreshTrigger refreshTrigger;
 
     private static MockWebServer mockDataManagementService;
-
-    private static MockWebServer mockSubscriptionManagementService;
-
     private static MockWebServer mockAccountManagementService;
 
     @BeforeAll
     static void setUp() throws IOException {
         mockDataManagementService = new MockWebServer();
         mockDataManagementService.start(4552);
-
-        mockSubscriptionManagementService = new MockWebServer();
-        mockSubscriptionManagementService.start(4553);
 
         mockAccountManagementService = new MockWebServer();
         mockAccountManagementService.start(4554);
@@ -41,7 +35,6 @@ class RefreshTriggerTest {
     @AfterAll
     static void tearDown() throws IOException {
         mockDataManagementService.shutdown();
-        mockSubscriptionManagementService.shutdown();
         mockAccountManagementService.shutdown();
     }
 
@@ -50,26 +43,20 @@ class RefreshTriggerTest {
         WebClient webClient = WebClient.create();
 
         String dataManagementUrl = "http://localhost:4552";
-        String subscriptionManagementUrl = "http://localhost:4553";
         String accountManagementUrl = "http://localhost:4554";
 
         refreshTrigger =
-            new RefreshTrigger(webClient, dataManagementUrl, subscriptionManagementUrl, accountManagementUrl);
+            new RefreshTrigger(webClient, dataManagementUrl, accountManagementUrl);
     }
 
     @Test
     void testTrigger() throws InterruptedException {
         mockDataManagementService.enqueue(new MockResponse());
-        mockSubscriptionManagementService.enqueue(new MockResponse());
         mockAccountManagementService.enqueue(new MockResponse());
 
         refreshTrigger.trigger();
 
         RecordedRequest recordedRequest = mockDataManagementService.takeRequest();
-        assertEquals("POST", recordedRequest.getMethod(), "Method not as expected");
-        assertEquals("/view/refresh", recordedRequest.getPath(), "Path not as expected");
-
-        recordedRequest = mockSubscriptionManagementService.takeRequest();
         assertEquals("POST", recordedRequest.getMethod(), "Method not as expected");
         assertEquals("/view/refresh", recordedRequest.getPath(), "Path not as expected");
 
