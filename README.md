@@ -36,7 +36,7 @@ In practice, the service is usually containerized within a hosted kubernetes env
 - Triggers the Media Application Report functionality within Account Management
 - Triggers the MI Report functionality within Publication Services
 - Triggers the No Match Artefact report within Data Management
-- Triggers the refresh of materialised views within Data Management, Subscription Management and Account Management
+- Triggers the refresh of materialised views within Data Management, and Account Management
 - Triggers the sending of subscriptions for future dated publications within Data Management
 
 ## Architecture Diagram

@@ -17,16 +17,13 @@ public class RefreshTrigger implements Trigger {
     private final WebClient webClient;
 
     private final String dataManagementUrl;
-    private final String subscriptionManagementUrl;
     private final String accountManagementUrl;
 
     public RefreshTrigger(@Autowired WebClient webClient,
                           @Value("${service-to-service.data-management}") String dataManagementUrl,
-                          @Value("${service-to-service.subscription-management}") String subscriptionManagementUrl,
                           @Value("${service-to-service.account-management}") String accountManagementUrl) {
         this.webClient = webClient;
         this.dataManagementUrl = dataManagementUrl;
-        this.subscriptionManagementUrl = subscriptionManagementUrl;
         this.accountManagementUrl = accountManagementUrl;
     }
 
@@ -35,11 +32,6 @@ public class RefreshTrigger implements Trigger {
     public void trigger() {
         webClient.post().uri(String.format("%s/view/refresh", dataManagementUrl))
             .attributes(clientRegistrationId("dataManagementApi"))
-            .retrieve()
-            .bodyToMono(String.class).block();
-
-        webClient.post().uri(String.format("%s/view/refresh", subscriptionManagementUrl))
-            .attributes(clientRegistrationId("subscriptionManagementApi"))
             .retrieve()
             .bodyToMono(String.class).block();
 
