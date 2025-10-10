@@ -19,7 +19,6 @@ public class AccountInactiveVerificationTrigger implements Trigger {
 
     private final List<String> notifyUrls = List.of(
         "/media/inactive/notify",
-        "/admin/inactive/notify",
         "/idam/inactive/notify"
     );
 
