@@ -55,16 +55,11 @@ class AccountVerificationTriggerTest {
         mockAccountManagementService.enqueue(new MockResponse());
         mockAccountManagementService.enqueue(new MockResponse());
         mockAccountManagementService.enqueue(new MockResponse());
-        mockAccountManagementService.enqueue(new MockResponse());
         accountInactiveVerificationTrigger.trigger();
 
         RecordedRequest recordedRequest = mockAccountManagementService.takeRequest();
         assertEquals(POST_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
         assertEquals("/account/media/inactive/notify", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
-
-        recordedRequest = mockAccountManagementService.takeRequest();
-        assertEquals(POST_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
-        assertEquals("/account/admin/inactive/notify", recordedRequest.getPath(), PATH_NOT_AS_EXPECTED);
 
         recordedRequest = mockAccountManagementService.takeRequest();
         assertEquals(POST_METHOD, recordedRequest.getMethod(), METHOD_NOT_AS_EXPECTED);
