@@ -1,5 +1,6 @@
 plugins {
   id 'application'
+  id 'uk.gov.hmcts.java' version '0.12.67'
   id 'checkstyle'
   id 'pmd'
   id 'jacoco'
@@ -49,9 +50,7 @@ test {
 }
 
 checkstyle {
-  maxWarnings = 0
   toolVersion = '12.1.1'
-  getConfigDirectory().set(new File(rootDir, 'config/checkstyle'))
 }
 
 pmd {
@@ -93,26 +92,8 @@ dependencyUpdates {
 
 // https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/configuration.html
 dependencyCheck {
-  // Specifies if the build should be failed if a CVSS score above a specified level is identified.
-  // range of 0-10 fails the build, anything greater and it doesn't fail the build
-  failBuildOnCVSS = 0
   suppressionFile = 'config/owasp/suppressions.xml'
   skipTestGroups  = false
-
-  analyzers {
-    // Disable scanning of .NET related binaries
-    assemblyEnabled = false
-  }
-  skipConfigurations = [
-    "checkstyle",
-    "compileOnly",
-    "pmd",
-    "integrationTest",
-    "functionalTest",
-    "smokeTest",
-    "contractTestRuntimeClasspath",
-    "contractTestCompileClasspath"
-  ]
 }
 
 repositories {
