@@ -30,6 +30,7 @@
   <suppress>
     <notes>Vulnerability in fasterxml jackson</notes>
     <cve>CVE-2026-29062</cve>
+    <cve>CVE-2026-54515</cve>
   </suppress>
   <suppress>
     <notes>Tomcat 10.1.52 false positives or accepted risk</notes>
@@ -113,5 +114,9 @@
     <cve>CVE-2026-43513</cve>
     <cve>CVE-2026-42498</cve>
     <cve>CVE-2026-43514</cve>
+  </suppress>
+  <suppress>
+    <notes>kotlin suppression</notes>
+    <cve>CVE-2026-53914</cve>
   </suppress>
 </suppressions>
