@@ -81,6 +81,7 @@
     <notes>log4j suppression</notes>
     <cve>CVE-2026-34479</cve>
     <cve>CVE-2026-34477</cve>
+    <cve>CVE-2026-49844</cve>
   </suppress>
   <suppress>
     <notes>netty suppression</notes>
@@ -121,5 +122,7 @@
     <cve>CVE-2026-59084</cve>
     <cve>CVE-2026-50229</cve>
     <cve>CVE-2026-55276</cve>
+    <cve>CVE-2026-59083</cve>
+    <cve>CVE-2026-53434</cve>
   </suppress>
 </suppressions>
