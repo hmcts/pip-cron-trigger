@@ -49,7 +49,7 @@ In practice, the service is usually containerized within a hosted kubernetes env
 
 ##### General
 
-- [Java JDK 21](https://openjdk.org/projects/jdk/21/) - this is used throughout all of our services.
+- [Java JDK 21](https://openjdk.org/projects/jdk/21/) - this is used throughout all of our services
 
 ##### Local development
 
@@ -86,10 +86,8 @@ Below is a table of currently used environment variables for starting the servic
 | TENANT_ID                    | The tenant ID for the Azure Active Directory                                                                    | No        |
 | DATA_MANAGEMENT_AZ_API       | The Scope for Data Management                                                                                   | No        |
 | ACCOUNT_MANAGEMENT_AZ_API    | The Scope for Account Management                                                                                | No        |
-| PUBLICATION_SERVICES_AZ_API  | The Scope for Publication Services                                                                              | No        |
 | DATA_MANAGEMENT_URL          | The URL for Data Management (Defaults to Staging)                                                               | No        |
 | ACCOUNT_MANAGEMENT_URL       | The URL for Account Management (Defaults to Staging)                                                            | No        |
-| PUBLICATION_SERVICES_URL     | The URL for Publication Services (Defaults to Staging)                                                          | No        |
 | TRIGGER_TYPE                 | The trigger type to use for the app. This is what determines what action is run. Must be one of 'ScheduleTypes' | Yes       |
 
 #### Application.yaml files
