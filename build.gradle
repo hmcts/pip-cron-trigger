@@ -20,6 +20,12 @@ java {
   }
 }
 
+configurations {
+  all {
+    exclude group: 'commons-logging', module: 'commons-logging'
+  }
+}
+
 
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:unchecked" << "-Werror"
