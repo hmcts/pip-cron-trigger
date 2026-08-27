@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.pip.cron.trigger.model;
 
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.AccountInactiveVerificationTrigger;
+import uk.gov.hmcts.reform.pip.cron.trigger.triggers.ArchivedAccountDeletionTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.AuditTableTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.ExpiredArtefactsTrigger;
 import uk.gov.hmcts.reform.pip.cron.trigger.triggers.MediaApplicationReportingTrigger;
@@ -21,7 +22,8 @@ public enum ScheduleTypes {
     NO_MATCH_ARTEFACTS(NoMatchArtefactsTrigger.class),
     EXPIRED_ARTEFACTS(ExpiredArtefactsTrigger.class),
     REFRESH_VIEWS(RefreshTrigger.class),
-    CLEAR_AUDIT_TABLE(AuditTableTrigger.class);
+    CLEAR_AUDIT_TABLE(AuditTableTrigger.class),
+    DELETE_ARCHIVED_ACCOUNTS(ArchivedAccountDeletionTrigger.class);
 
     private final Class<? extends Trigger> triggerClass;
 
