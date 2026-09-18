@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProvider
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.ClientAttributes;
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -21,6 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 @Profile("!test")
 public class WebClientConfiguration {
+    private static final String DEFAULT_CLIENT_REGISTRATION_ID = "accountManagementApi";
 
     @Bean
     public OAuth2AuthorizedClientManager authorizedClientManager(ClientRegistrationRepository clients) {
@@ -46,9 +48,14 @@ public class WebClientConfiguration {
     }
 
     static ClientRequest withBearerToken(ClientRequest request,
-                                                 OAuth2AuthorizedClientManager authorizedClientManager) {
+                                         OAuth2AuthorizedClientManager authorizedClientManager) {
+        String clientRegistrationId = ClientAttributes.resolveClientRegistrationId(request.attributes());
+        if (clientRegistrationId == null) {
+            clientRegistrationId = DEFAULT_CLIENT_REGISTRATION_ID;
+        }
+
         OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest
-            .withClientRegistrationId("accountManagementApi")
+            .withClientRegistrationId(clientRegistrationId)
             .principal("pip-cron-trigger")
             .build();
         OAuth2AuthorizedClient authorizedClient = authorizedClientManager.authorize(authorizeRequest);
