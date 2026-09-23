@@ -30,17 +30,12 @@
     <cve>CVE-2026-54516</cve>
   </suppress>
   <suppress>
-    <notes>Vulnerability in netty</notes>
-    <cve>CVE-2026-33870</cve>
-    <cve>CVE-2026-33871</cve>
-  </suppress>
-  <suppress>
     <notes>Vulnerability in fasterxml jackson</notes>
     <cve>CVE-2026-29062</cve>
     <cve>CVE-2026-54515</cve>
   </suppress>
   <suppress>
-    <notes>Tomcat 10.1.52 false positives or accepted risk</notes>
+    <notes>Tomcat suppression</notes>
     <cve>CVE-2026-29145</cve>
     <cve>CVE-2026-24880</cve>
     <cve>CVE-2026-29129</cve>
@@ -50,10 +45,17 @@
     <cve>CVE-2026-34500</cve>
     <cve>CVE-2026-25854</cve>
     <cve>CVE-2026-32990</cve>
-  </suppress>
-  <suppress>
-    <notes>Tomcat 10.1.55</notes>
     <cve>CVE-2026-66299</cve>
+    <cve>CVE-2026-65637</cve>
+    <cve>CVE-2026-65905</cve>
+    <cve>CVE-2026-65182</cve>
+    <cve>CVE-2026-68525</cve>
+    <cve>CVE-2026-65183</cve>
+    <cve>CVE-2026-66422</cve>
+    <cve>CVE-2026-68569</cve>
+    <cve>CVE-2026-65927</cve>
+    <cve>CVE-2026-68763</cve>
+    <cve>CVE-2026-73180</cve>
   </suppress>
   <suppress>
     <notes>proton-j 0.34.1</notes>
@@ -202,5 +204,9 @@
   <suppress>
     <notes>spring-cloud-azure suppression</notes>
     <cve>CVE-2026-50338</cve>
+  </suppress>
+  <suppress>
+    <notes>reactor-netty suppression</notes>
+    <cve>CVE-2026-47874</cve>
   </suppress>
 </suppressions>
