@@ -2,12 +2,10 @@
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
   <suppress>
     <notes>spring-cloud-azure-starter-active-directory suppression</notes>
-    <packageUrl regex="true">^pkg:maven/com\.azure\.spring/spring\-cloud\-azure\-starter\-active\-directory@.*$</packageUrl>
     <cve>CVE-2021-42306</cve>
   </suppress>
   <suppress>
     <notes>azure identity suppression</notes>
-    <packageUrl regex="true">^pkg:maven/com\.azure/azure\-identity@.*$</packageUrl>
     <cve>CVE-2023-36415</cve>
     <cve>CVE-2024-35255</cve>
   </suppress>
